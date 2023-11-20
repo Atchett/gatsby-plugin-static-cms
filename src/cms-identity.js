@@ -1,25 +1,27 @@
 /* global CMS_PUBLIC_PATH */
-import netlifyIdentityWidget from "netlify-identity-widget"
+import netlifyIdentityWidget from "netlify-identity-widget";
 
-window.netlifyIdentity = netlifyIdentityWidget
+window.netlifyIdentity = netlifyIdentityWidget;
 
 const addLoginListener = () =>
   netlifyIdentityWidget.on(`login`, () => {
-    document.location.href = `${__PATH_PREFIX__}/${CMS_PUBLIC_PATH}/`
-  })
+    document.location.href = `${__PATH_PREFIX__}/${CMS_PUBLIC_PATH}/`;
+  });
 
-netlifyIdentityWidget.on(`init`, user => {
+netlifyIdentityWidget.on(`init`, (user) => {
   if (!user) {
-    addLoginListener()
+    addLoginListener();
   } else {
     netlifyIdentityWidget.on(`logout`, () => {
-      addLoginListener()
-    })
+      addLoginListener();
+    });
   }
-})
+});
 
 // Boot on next tick to prevent clashes with css injected into StaticCMS
 // preview pane.
-setImmediate(() => {
-  netlifyIdentityWidget.init()
-})
+// setImmediate not defined error
+// https://itsourcecode.com/referenceerror/referenceerror-setimmediate-is-not-defined/
+setTimeout(() => {
+  netlifyIdentityWidget.init();
+}, 0);
