@@ -20,8 +20,6 @@ netlifyIdentityWidget.on(`init`, (user) => {
 
 // Boot on next tick to prevent clashes with css injected into StaticCMS
 // preview pane.
-// setImmediate not defined error
-// https://itsourcecode.com/referenceerror/referenceerror-setimmediate-is-not-defined/
 setTimeout(() => {
   netlifyIdentityWidget.init();
 }, 0);
