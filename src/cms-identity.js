@@ -20,6 +20,7 @@ netlifyIdentityWidget.on(`init`, (user) => {
 
 // Boot on next tick to prevent clashes with css injected into StaticCMS
 // preview pane.
+// 'Fix' for https://github.com/StaticJsCMS/gatsby-plugin-static-cms/issues/39#issue-2238255267
 setTimeout(() => {
   netlifyIdentityWidget.init();
 }, 0);

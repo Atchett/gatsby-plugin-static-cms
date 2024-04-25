@@ -1,5 +1,11 @@
 # gatsby-plugin-static-cms
 
+## Note:
+
+I was getting an error relating to setImmediate not being found: [https://github.com/StaticJsCMS/gatsby-plugin-static-cms/issues/39#issue-2238255267](https://github.com/StaticJsCMS/gatsby-plugin-static-cms/issues/39#issue-2238255267)
+
+This is a minor fix to that issue. Use it at your own risk.
+
 ## Overview
 
 Automatically generates an `admin/index.html` with a default Static CMS implementation.
@@ -20,7 +26,7 @@ npm install @staticcms/app gatsby-plugin-static-cms
 Add the Static CMS plugin in your `gatsby-config.js`:
 
 ```javascript
-plugins: [`gatsby-plugin-static-cms`]
+plugins: [`gatsby-plugin-static-cms`];
 ```
 
 Then add your Static CMS [configuration
@@ -58,7 +64,7 @@ plugins: [
       modulePath: `${__dirname}/src/cms/cms.js`,
     },
   },
-]
+];
 ```
 
 The js module might look like this:
@@ -69,9 +75,9 @@ The js module might look like this:
  * extension registration methods, such as `registerWidget` and
  * `registerPreviewTemplate`.
  */
-import CMS from "@staticcms/app"
+import CMS from "@staticcms/app";
 
-import '@staticcms/app/dist/main.css';
+import "@staticcms/app/dist/main.css";
 
 /**
  * Any imported styles should be automatically be applied to the editor preview
@@ -83,21 +89,21 @@ import '@staticcms/app/dist/main.css';
  * All of the example imports below would result in styles being applied to the
  * preview pane.
  */
-import "module-that-imports-styles.js"
-import "styles.scss"
-import "../other-styles.css"
+import "module-that-imports-styles.js";
+import "styles.scss";
+import "../other-styles.css";
 
 /**
  * Let's say you've created widget and preview components for a custom image
  * gallery widget in separate files:
  */
-import ImageGalleryWidget from "./image-gallery-widget.js"
-import ImageGalleryPreview from "./image-gallery-preview.js"
+import ImageGalleryWidget from "./image-gallery-widget.js";
+import ImageGalleryPreview from "./image-gallery-preview.js";
 
 /**
  * Register the imported widget:
  */
-CMS.registerWidget(`image-gallery`, ImageGalleryWidget, ImageGalleryPreview)
+CMS.registerWidget(`image-gallery`, ImageGalleryWidget, ImageGalleryPreview);
 ```
 
 ### `manualInit`
@@ -114,15 +120,15 @@ plugins: [
       manualInit: true,
     },
   },
-]
+];
 ```
 
 The js module might look like this:
 
 ```javascript
-import CMS from "@staticcms/app"
+import CMS from "@staticcms/app";
 
-import '@staticcms/app/dist/main.css';
+import "@staticcms/app/dist/main.css";
 
 /**
  * Optionally pass in a config object. This object will be merged into `config.yml` if it exists
@@ -134,7 +140,7 @@ CMS.init({
       name: "git-gateway",
     },
   },
-})
+});
 ```
 
 ### `enableIdentityWidget`
@@ -153,7 +159,7 @@ plugins: [
       enableIdentityWidget: true,
     },
   },
-]
+];
 ```
 
 ### `publicPath`
@@ -199,19 +205,19 @@ plugins: [
     resolve: `gatsby-plugin-static-cms`,
     options: {
       customizeWebpackConfig: (config, { plugins }) => {
-        const Plugin = require("...")
+        const Plugin = require("...");
 
         config.plugins.push(
           plugins.define({
             "process.env.MY_VAR": JSON.stringify("my var value"),
           })
-        )
+        );
 
-        config.plugins.push(new Plugin())
+        config.plugins.push(new Plugin());
       },
     },
   },
-]
+];
 ```
 
 ## Example
@@ -232,7 +238,7 @@ plugins: [
       includeRobots: false,
     },
   },
-]
+];
 ```
 
 ## Disable widget on site
@@ -240,7 +246,7 @@ plugins: [
 If you're not using Netlify Identity within your site you have the option to completely disable the widget (and not the CMS). To do so, add the following to `gatsby-node.js`:
 
 ```javascript
-const webpack = require(`webpack`)
+const webpack = require(`webpack`);
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -249,8 +255,8 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         resourceRegExp: /^netlify-identity-widget$/,
       }),
     ],
-  })
-}
+  });
+};
 ```
 
 ## Support
